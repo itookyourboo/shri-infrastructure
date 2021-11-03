@@ -12,7 +12,7 @@ HEADER_ORG_ID="X-Org-ID: ${ORG_ID}"
 HEADER_CONTENT_TYPE="Content-Type: application/json"
 
 TICKET_URL=$(
-  curl -s X POST ${URL} \
+  curl -s -X POST ${URL} \
   --header "${HEADER_OAUTH}" \
   --header "${HEADER_ORG_ID}" \
   --header "${HEADER_CONTENT_TYPE}" \
@@ -20,13 +20,13 @@ TICKET_URL=$(
     "filter": {
       "unique": "'"${UNIQUE_TAG}"'"
       }
-  }' | jq -r '.[0].key'
+  }' | jq -r '.[].self'
 )
 
 echo "Ticket: ${TICKET_URL}"
 
 COMMENT_URL=$(
-  curl -s X POST ${URL} \
+  curl -s -X POST ${URL} \
   --header "${HEADER_OAUTH}" \
   --header "${HEADER_ORG_ID}" \
   --header "${HEADER_CONTENT_TYPE}" \
@@ -34,7 +34,7 @@ COMMENT_URL=$(
     "filter": {
       "unique": "'"${UNIQUE_TAG}"'"
     }
-  }' | jq -r '.[0].key'
+  }' | jq -r '.[].description'
 )
 
 COMMENT='{

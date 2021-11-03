@@ -10,7 +10,7 @@ DATE=$(git show "${VERSION}" --pretty=format:"%ad" --no-patch)
 echo "${AUTHOR}: ${DATE}"
 
 CHANGELOG=$(git log "$PREVIOUS_VERSION".. --pretty=format:"%s | %an, %ad" --date=short)
-SUMMARY="RELEASE $VERSION by ${AUTHOR}, ${DATE}"
+SUMMARY="${VERSION}: ${AUTHOR}, ${DATE}"
 echo "\nChangelog:\n${CHANGELOG}\n"
 
 CREATE_TASK_URL="https://api.tracker.yandex.net/v2/issues/"
